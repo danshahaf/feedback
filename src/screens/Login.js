@@ -1,13 +1,15 @@
+// Login.js
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import styles from '../styles/styles_Login';
 
-const Login = ({ navigation }) => {
+const Login = ({ navigation, onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    navigation.replace('Discover');
+    onLogin(); // Trigger login and navigate to the main app layout
   };
 
   return (

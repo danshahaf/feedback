@@ -1,59 +1,65 @@
 import { StyleSheet } from 'react-native';
 
+const MAIN_COLOR = '#0062ff';
+
 export default StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flex: 1,
     padding: 20,
+    backgroundColor: '#f9f9f9',
   },
-  leftSection: {
-    flex: 3,
+  profileInfo: {
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    marginBottom: 20,
   },
   profilePhoto: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 15,
+    borderWidth: 2,
+    borderColor: MAIN_COLOR,
   },
   socialLinks: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '60%',
+    justifyContent: 'center',
     marginTop: 10,
   },
   icon: {
-    color: '#000', // Customize color if needed
+    color: MAIN_COLOR,
+    marginHorizontal: 8,
   },
-  separator: {
-    height: 1,
-    backgroundColor: '#ccc',
-    width: '100%',
-    marginVertical: 10,
-  },
-  verticalSeparator: {
-    width: 1,
-    backgroundColor: '#ccc',
-    marginHorizontal: 15,
+  bioSection: {
+    paddingHorizontal: 15,
+    marginBottom: 25,
   },
   bioText: {
     fontSize: 16,
     lineHeight: 24,
     textAlign: 'center',
-    paddingHorizontal: 10,
+    color: '#333',
   },
-  rightSection: {
-    flex: 7,
-    paddingLeft: 20,
-    justifyContent: 'flex-start',
+  portfolioSection: {
+    paddingHorizontal: 15,
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
+    color: MAIN_COLOR,
+    marginBottom: 15,
+    textAlign: 'center',
   },
   sectionTitle: {
-    fontSize: 16,
-    marginVertical: 10,
+    fontSize: 18,
+    fontWeight: '600',
+    color: MAIN_COLOR,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#ddd',
+    width: '100%',
+    marginVertical: 15,
   },
 });

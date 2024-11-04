@@ -1,63 +1,49 @@
-import React from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
-import ProjectTicket from './ProjectTicket'; // assuming ProjectTicket is in the same directory
-import styles from '../styles/styles_Discover';
+// Discover.js
+
+import React, { useState } from 'react';
+import { View, Text, Animated } from 'react-native';
+import FeedList from './FeedList';
+import ProjectDetails from './ProjectDetails';
+import styles from '../styles/discover/styles_Discover';
 
 const Discover = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const slideAnim = useState(new Animated.Value(0))[0];
+
+  const openProjectDetails = (project) => {
+    setSelectedProject(project);
+    Animated.timing(slideAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const closeProjectDetails = () => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start(() => setSelectedProject(null));
+  };
+
+  const slideInPosition = slideAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['100%', '50%'],
+  });
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Discover</Text>
-      <ScrollView contentContainerStyle={styles.feedContainer}>
-        {/* Quick Post Section */}
-        <View style={styles.feedItem}>
-          <View style={styles.profileInfo}>
-            <Image source={{ uri: 'https://example.com/profile.jpg' }} style={styles.profilePhoto} />
-            <View>
-              <Text style={styles.profileName}>Founder Name</Text>
-              <Text style={styles.timestamp}>2h ago</Text>
-            </View>
-          </View>
-          <Text style={styles.postText}>This is a quick post with text content like a tweet.</Text>
-        </View>
+      {/* <Text style={styles.header}>Discover</Text> */}
+      <View style={[styles.feedWrapper, selectedProject && styles.feedWrapperShifted]}>
+        <FeedList onProjectPress={openProjectDetails} />
+      </View>
 
-        {/* Project Update Section */}
-        <View style={styles.feedItem}>
-          <View style={styles.profileInfo}>
-            <Image source={{ uri: 'https://example.com/profile.jpg' }} style={styles.profilePhoto} />
-            <View>
-              <Text style={styles.profileName}>Founder Name</Text>
-              <Text style={styles.timestamp}>5h ago</Text>
-            </View>
-          </View>
-          <Text style={styles.postText}>This is an update for a project. Here are the latest details...</Text>
-          <ProjectTicket
-            logo="https://example.com/project-logo.jpg"
-            title="Project Title"
-            description="A brief description of the project"
-            score="8.9"
-          />
-        </View>
-
-        {/* Money Raised Section */}
-        <View style={styles.feedItem}>
-          <View style={styles.profileInfo}>
-            <Image source={{ uri: 'https://example.com/profile.jpg' }} style={styles.profilePhoto} />
-            <View>
-              <Text style={styles.profileName}>Investor Name</Text>
-              <Text style={styles.timestamp}>1d ago</Text>
-            </View>
-          </View>
-          <Text style={styles.postText}>
-            <Text style={styles.investmentAmount}>$500,000</Text> invested in this project.
-          </Text>
-          <ProjectTicket
-            logo="https://example.com/project-logo.jpg"
-            title="Project Title"
-            description="A brief description of the project"
-            score="9.2"
-          />
-        </View>
-      </ScrollView>
+      {selectedProject && (
+        <Animated.View style={[styles.projectDetailsContainer, { transform: [{ translateX: slideInPosition }] }]}>
+          <ProjectDetails project={selectedProject} onClose={closeProjectDetails} />
+        </Animated.View>
+      )}
     </View>
   );
 };

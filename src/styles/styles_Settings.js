@@ -1,21 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+const MAIN_COLOR = '#0062ff';
+
 export default StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
-    backgroundColor: '#ffffff',
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    backgroundColor: '#f9f9f9',
   },
   settingTicket: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ffffff',
     borderRadius: 10,
     padding: 15,
     marginVertical: 10,
@@ -28,6 +24,31 @@ export default StyleSheet.create({
   settingLabel: {
     fontSize: 18,
     color: '#333',
+    fontWeight: '500',
+  },
+  sectionHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: MAIN_COLOR,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  linkButton: {
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    marginVertical: 5,
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1.41,
+    alignItems: 'center',
+  },
+  linkText: {
+    fontSize: 16,
+    color: MAIN_COLOR,
     fontWeight: '500',
   },
 });
